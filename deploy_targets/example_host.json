@@ -1,0 +1,6 @@
+{
+  "example_data": {
+    "some_data": "This string is available to the recipe at node[:example_data][:some_data]"
+  },
+  "run_list": [ "recipe[op::default]" ]
+}

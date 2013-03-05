@@ -1,12 +1,10 @@
 #!/bin/bash
 
 # This runs as root on the server
-# ./install.sh chef_json_file.json
-
-chef_binary=/var/lib/gems/1.9.1/bin/chef-solo
+# ./install.sh
 
 # Are we on a vanilla system?
-if ! test -f "$chef_binary"; then
+if ! command -v chef-solo >/dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
     # Upgrade headlessly (this is only safe-ish on vanilla systems)
     apt-get update &&
@@ -17,4 +15,4 @@ if ! test -f "$chef_binary"; then
     sudo gem1.9.1 install --no-rdoc --no-ri chef --version 0.10.4
 fi &&
 
-"$chef_binary" -c solo.rb -j solo.json
+chef-solo -c solo.rb -j solo.json
